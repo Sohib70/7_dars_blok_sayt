@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -14,10 +15,14 @@ def index(request):
         first_news.extend(news[len(news)-4:len(news)-len(first_news)])
     news = News.objects.all().order_by('-created_at')
     return render(request,'index.html',{'categories':categories,'first_news':first_news})
-
+@login_required(login_url='login')
 def category(request,pk):
     category = Category.objects.get(id=pk)
     news = News.objects.filter(category=category).order_by('-id')
     return render(request,'category-01.html',{'news':news,'category':category})
+
+def new_detail(request,pk):
+    post = News.objects.get(id=pk)
+    return render(request,'blog-detail-01.html',{'post':post})
 
 
