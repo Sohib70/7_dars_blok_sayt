@@ -51,35 +51,7 @@
         <form method="POST">
             {% csrf_token %}
 
-            <div class="mb-3 input-group">
-                <i class="fa fa-user form-icon"></i>
-                <input type="text" class="form-control" name="username" placeholder="Foydalanuvchi nomi" required>
-            </div>
-
-            <div class="mb-3 input-group">
-                <i class="fa fa-id-card form-icon"></i>
-                <input type="text" class="form-control" name="first_name" placeholder="Ism" required>
-            </div>
-
-            <div class="mb-3 input-group">
-                <i class="fa fa-id-card form-icon"></i>
-                <input type="text" class="form-control" name="last_name" placeholder="Familiya" required>
-            </div>
-
-            <div class="mb-3 input-group">
-                <i class="fa fa-envelope form-icon"></i>
-                <input type="email" class="form-control" name="email" placeholder="Email manzil" required>
-            </div>
-
-            <div class="mb-3 input-group">
-                <i class="fa fa-lock form-icon"></i>
-                <input type="password" class="form-control" name="password1" placeholder="Parol" required>
-            </div>
-
-            <div class="mb-3 input-group">
-                <i class="fa fa-lock form-icon"></i>
-                <input type="password" class="form-control" name="password2" placeholder="Parolni tasdiqlang" required>
-            </div>
+            {{form.as_p}}
 
             <button type="submit" class="btn btn-primary w-100">Ro‘yxatdan o‘tish</button>
 
