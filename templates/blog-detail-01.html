@@ -2,6 +2,11 @@
 <html lang="en">
 {% load static %}
 <head>
+	 {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
 	<title>Blog Detail With Sidebar</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -2391,28 +2396,43 @@
 
 						<!-- Leave a comment -->
 						<div>
-							<h4 class="f1-l-4 cl3 p-b-12">
-								Leave a Comment
-							</h4>
 
-							<p class="f1-s-13 cl8 p-b-40">
-								Your email address will not be published. Required fields are marked *
-							</p>
+<div class="comment-list">
+  <h4>Izohlar</h4>
+  {% if comments %}
+    {% for comment in comments %}
+      <div class="comment-box" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+        <p style="margin: 0;"><strong>{{ comment.user.username }}</strong></p>
+        <p style="margin: 5px 0 0;">{{ comment.pos_text }}</p>
+        <small style="color: gray;">{{ comment.created_at|date:"Y-m-d H:i" }}</small>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Hozircha izohlar yo'q.</p>
+  {% endif %}
+</div>
 
-							<form>
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Comment..."></textarea>
+<!-- Comment yuborish formasi -->
+<form method="post" style="margin-top: 30px;">
+  {% csrf_token %}
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Name*">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
+</form>
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Website">
+								<form method="post">
+			{% csrf_token %}
+			<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Comment..."></textarea>
 
-								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-									Post Comment
-								</button>
-							</form>
-						</div>
+			<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10" type="submit">
+				Post Comment
+			</button>
+		</form>
+								</div>
 					</div>
 				</div>
 				

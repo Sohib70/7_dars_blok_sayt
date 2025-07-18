@@ -7,7 +7,9 @@ urlpatterns = [
     path('login/',login_view,name='login'),
     path('logout/',logout_view,name='logout'),
     path('profile/',profile,name='profile'),
-    path('change-pass/',change_pass_view, name='change-pass')
+    path('change-pass/',change_pass_view, name='change-pass'),
+    path('reset/',reset_pass, name='reset'),
+    path('reset2/',reset_pass2, name='reset2')
 ]
 
 # from django.urls import path
